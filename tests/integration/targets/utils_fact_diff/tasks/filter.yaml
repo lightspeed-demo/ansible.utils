@@ -6,7 +6,7 @@
     plugin:
       vars:
         skip_lines:
-          - "+"
+          - +
 
 - name: Check for graceful fail of invalid regex
   ansible.builtin.set_fact: "{{ before | ansible.utils.fact_diff(after, plugin) }}"
@@ -17,7 +17,7 @@
   ansible.builtin.assert:
     that: "{{ msg in result.msg }}"
   vars:
-    msg: "The regex '+', is not valid"
+    msg: The regex '+', is not valid
 
 - name: Check argspec validation
   ansible.builtin.set_fact: "{{ ansible.utils.fact_diff([1, 2, 3]) }}"
@@ -29,7 +29,7 @@
     that: "{{ msg in result.msg }}"
   vars:
     msg: "missing required arguments: after"
-  when: "result.msg | type_debug == 'list'"
+  when: result.msg | type_debug == 'list'
 
 - name: Check argspec validation
   ansible.builtin.set_fact: "{{ ansible.utils.fact_diff([1, 2, 3]) }}"
@@ -41,7 +41,7 @@
     that: "{{ msg in result.msg }}"
   vars:
     msg: "missing required arguments: before"
-  when: "result.msg | type_debug == 'list'"
+  when: result.msg | type_debug == 'list'
 
 - name: Set fact
   ansible.builtin.set_fact:
